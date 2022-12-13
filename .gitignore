@@ -1,7 +1,2 @@
 node_modules/
-db/
-middleware
-models 
-routes
-utility
 .env
