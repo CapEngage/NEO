@@ -1,6 +1,6 @@
 const express = require('express');
 const BrandAccount = require('../models/BrandAccount');
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { v4: uuidv4 } = require('uuid');
 
@@ -23,7 +23,7 @@ BrandAccountRoute.post('/register', (req, res, next) => {
   const API_Token = uuidv4();
   
    
-  bcrypt
+  bcryptjs
     .hash(req.body.password, 10)
     .then((hash) => {
       const _BrandAccount = new BrandAccount({
@@ -155,7 +155,7 @@ BrandAccountRoute.post('/login', (req, res, next) => {
         });
       }
       FetchedBrandAccountData = _BrandAccount;
-      return bcrypt.compare(req.body.password, _BrandAccount.password);
+      return bcryptjs.compare(req.body.password, _BrandAccount.password);
     })
     .then((result) => {
       if (!result) {
