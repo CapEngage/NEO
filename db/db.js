@@ -5,7 +5,7 @@ require('dotenv').config();
 //MONGO_URL="mongodb+srv://CapEngage:JGZTClHXHeR8q2pO@capengage.ajgfa.mongodb.net/CapEngage"
 const InitiateMongoServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_URL.toString(), {
       useNewUrlParser: true
     });
     console.log("Connected to DataBase !!");
