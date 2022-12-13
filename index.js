@@ -1,5 +1,23 @@
-const express = require('express')
-const app = express()
+const path = require("path");
+const express = require("express");
+
+const InitiateMongoServer = require("./db/db");
+const header_middleware = require("./middlewares/header");
+InitiateMongoServer();
+const BrandAccountRoute = require("./routes/BrandAccount");
+//const BrandAccountRoute = require("./routes/BrandAccount");
+const BrandUserRoute = require("./routes/BrandUser");
+const BrandEventRoute = require("./routes/Event");
+const SegmentRoute = require("./routes/Campaign/Segment");
+const EmailCampaignRoute = require("./routes/Campaign/EmailCampaign");
+const SMSCampaignRoute = require("./routes/Campaign/SMSCampaign");
+const app = express();
+
+var cors = require("cors");
+require("dotenv").config();
+
+app.use(header_middleware);
+app.use(cors({ origin: "*" }));
 const port = 3000
 
 
@@ -17,7 +35,7 @@ const port = 3000
   app.get('/', (req, res) => {
     res.send('Hello World!')
   })
-  
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
